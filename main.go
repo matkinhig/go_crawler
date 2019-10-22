@@ -34,10 +34,10 @@ func startWorker(ch chan string) chan Result {
 	out := make(chan Result)
 	go func() {
 		for url := range ch {
-			go func() {
+			go func(url string) {
 				result := parseContent(url)
 				out <- result
-			}()
+			}(url)
 		}
 	}()
 	return out
